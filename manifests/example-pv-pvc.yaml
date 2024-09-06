@@ -1,0 +1,31 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: hp01
+spec:
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: '/var/tmp/hp01'
+    type: 'Directory'
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: slow
+  volumeMode: Filesystem
+status: {}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: hp01-claim
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
+  storageClassName: slow
+  volumeMode: Filesystem
+status: {}
